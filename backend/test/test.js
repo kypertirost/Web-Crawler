@@ -1,5 +1,5 @@
 import { equal } from 'assert';
-import { getUrl } from "../util.js"
+import { getUrl, crawl } from "../util.js"
 
 describe("Utitlity Unit test", function() {
   describe("getUrl Function test", () => {
@@ -9,10 +9,14 @@ describe("Utitlity Unit test", function() {
     });
 
     it("relative link test with host `example.com`", () => {
-        equal(getUrl("test", "example.com", "http"), "http://example.com/test");
-        equal(getUrl("/test", "example.com", "http"), "http://example.com/test");
-        equal(getUrl("test", "example.com", "https"), "https://example.com/test");
-        equal(getUrl("/test", "example.com", "https"), "https://example.com/test");
+        equal(getUrl("test", "example.com", "http:"), "http://example.com/test");
+        equal(getUrl("/test", "example.com", "http:"), "http://example.com/test");
+        equal(getUrl("test", "example.com", "https:"), "https://example.com/test");
+        equal(getUrl("/test", "example.com", "https:"), "https://example.com/test");
+    })
+
+    it("Crawl Function test", () => {
+        crawl("http://localhost.com")
     })
   });
 });
