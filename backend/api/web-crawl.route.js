@@ -1,11 +1,11 @@
 import express from "express";
 import CrawlCtrl from "./controller/crawl.ctrl.js"
+import LoginCtrl from "./controller/login.ctrl.js";
 const router = express.Router();
 
-//TODO: Implement login
-// router.route("/login").post(
-    
-// );
+router.route("/login").post(
+    LoginCtrl.apiLogin
+);
 
 //TODO: Implement Web-crawl
 router.route("/crawl").get(

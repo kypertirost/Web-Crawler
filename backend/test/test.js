@@ -1,22 +1,25 @@
-import { equal } from 'assert';
+import expect from "expect.js"
 import { getUrl, crawl } from "../util.js"
 
 describe("Utitlity Unit test", function() {
   describe("getUrl Function test", () => {
     it('Absolute Link', function() {
-      equal(getUrl("http://example.com"), "http://example.com");
-      equal(getUrl("https://example.com"), "https://example.com");
+      expect(getUrl("http://example.com", "example.com", "http:")).to.be("http://example.com");
+      expect(getUrl("https://example.com", "example.com", "http:")).to.be("https://example.com");
     });
 
     it("relative link test with host `example.com`", () => {
-        equal(getUrl("test", "example.com", "http:"), "http://example.com/test");
-        equal(getUrl("/test", "example.com", "http:"), "http://example.com/test");
-        equal(getUrl("test", "example.com", "https:"), "https://example.com/test");
-        equal(getUrl("/test", "example.com", "https:"), "https://example.com/test");
+        expect(getUrl("test", "example.com", "http:")).to.be("http://example.com/test");
+        expect(getUrl("/test", "example.com", "http:")).to.be("http://example.com/test");
+        expect(getUrl("test", "example.com", "https:")).to.be("https://example.com/test");
+        expect(getUrl("/test", "example.com", "https:")).to.be("https://example.com/test");
     })
 
-    it("Crawl Function test", () => {
-        crawl("http://localhost.com")
+    it("Crawl Function test", async () => {
+        const result = await crawl("http://example.com");
+        //example.com contains several pages that redirect to other domain, exclude them.
+        expect(result).to.eql(["http://example.com"]);
+        
     })
   });
 });

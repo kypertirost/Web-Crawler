@@ -3,3 +3,6 @@
 
 # ignore any node 
 **/node_modules
+
+# ignore vscode setup
+.vscode

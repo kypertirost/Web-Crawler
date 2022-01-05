@@ -1,47 +1,19 @@
-
-
-
-const url = "";
-
-const visited = {};
+import { crawl } from "../../util.js";
 
 export default class CrawlCtrl {
     
     static async apiGetCrawlResult(req, res, next) {
-        //if the url is visited, ignore 
-        if (seenUrls[url]) return;
-        console.log("crawling", url);
-        seenUrls[url] = true;
-
-        const { host, protocol } = urlParser.parse(url);
-
-        const response = await fetch(url);
-        const html = await response.text();
-        const $ = cheerio.load(html);
-        const links = $("a")
-            .map((i, link) => link.attribs.href)
-            .get();
-
-        const imageUrls = $("img")
-            .map((i, link) => link.attribs.src)
-            .get();
-
-        imageUrls.forEach((imageUrl) => {
-            fetch(getUrl(imageUrl, host, protocol)).then((response) => {
-            const filename = path.basename(imageUrl);
-            const dest = fs.createWriteStream(`images/${filename}`);
-            response.body.pipe(dest);
+        const url = req.query.link;
+        try {
+            let parsed_link = new URL(url);
+            const result = await crawl(url);
+            res.status(200).json(result)
+        } catch(err) {
+            console.error("Not a valid link")
+            console.error(err);
+            res.status(400).json({
+                error: "Not a valid link"
             });
-        });
-
-        links
-            .filter((link) => link.includes(host) && !link.includes(ignore))
-            .forEach((link) => {
-            crawl({
-                url: getUrl(link, host, protocol),
-                ignore,
-            });
-            });
-
+        } 
     }
 }
