@@ -3,7 +3,7 @@ import { Card, Button, Alert, Form } from "react-bootstrap";
 import { useAuth } from "../contexts/auth";
 import { Link, useNavigate } from "react-router-dom";
 import WebCrawlerDataService from "../service/web-crawl-service";
-
+import {Buffer} from 'buffer';
 export default function Dashboard(){
     const urlRef = useRef();
     const [crawledUrl, setCrawledUrl] = useState([]);
@@ -27,12 +27,9 @@ export default function Dashboard(){
         setLoading(true);
 
         const url = urlRef.current.value;
+        const encodedLink = Buffer.from(url).toString('base64')
         setLoading(false);
-        WebCrawlerDataService.crawl(url)
-            .then(response => {
-                console.log(response.data);
-                setCrawledUrl(response.data)
-            });
+        navigate(`/crawl?link=${encodedLink}`);
     }
     return (
         <div>
@@ -42,9 +39,9 @@ export default function Dashboard(){
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleCrawlUrl}>
                         <div className="input-group mb-3">
-                        <Form.Control type="url" className="form-control" placeholder="http://example.com" aria-label="http://example.com" aria-describedby="basic-addon2" ref={urlRef} required/>
-                        <div className="input-group-append">
-                            <Button type="submit">Button</Button>
+                        <Form.Control type="url" className="form-control" placeholder="http://example.com" aria-label="http://example.com" aria-describedby="basic-addon2" ref={urlRef} required/>  
+                        <div className="pull-left">
+                            <Button type="submit">Crawl!</Button>
                         </div>
                         </div>
                     </Form>
@@ -55,12 +52,6 @@ export default function Dashboard(){
             <div className="w-100 text-center mt-2">
                  <Button variant="link" onClick={handleLogout}>Log Out</Button>
             </div>
-
-            {crawledUrl? 
-            <div> Hello World</div>
-            :
-            <Alert variant="danger">No crawled url found</Alert>
-            }
         </div>
     )
 }
