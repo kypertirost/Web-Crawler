@@ -1,14 +1,19 @@
-import React, {useState} from "react";
-import { Card, Button, Alert } from "react-bootstrap";
+import React, {useRef, useState, useEffect} from "react";
+import { Card, Button, Alert, Form } from "react-bootstrap";
 import { useAuth } from "../contexts/auth";
 import { Link, useNavigate } from "react-router-dom";
+import WebCrawlerDataService from "../service/web-crawl-service";
+
 export default function Dashboard(){
+    const urlRef = useRef();
+    const [crawledUrl, setCrawledUrl] = useState([]);
     const [ error, setError ] = useState("");
     const { currentUser, logout} = useAuth(); 
+    const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
+
     const handleLogout = async ()=> {
         setError("")
-
         try{ 
             await logout();
             navigate("/login");
@@ -16,20 +21,46 @@ export default function Dashboard(){
             setError("Failed to log out");
         }
     }
+
+    const handleCrawlUrl = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        const url = urlRef.current.value;
+        setLoading(false);
+        WebCrawlerDataService.crawl(url)
+            .then(response => {
+                console.log(response.data);
+                setCrawledUrl(response.data)
+            });
+    }
     return (
         <div>
             <Card>
                 <Card.Body>
-                    <h2 className="text-center mb-4"> Profile </h2>
+                    <h2 className="text-center mb-4"> Web Crawling </h2>
                     {error && <Alert variant="danger">{error}</Alert>}
-                    <strong>Email: </strong> {currentUser.email}
-                    <Link to="/update-profile" className="btn btn-primary w-100 mt-3">Update Profile</Link>
+                    <Form onSubmit={handleCrawlUrl}>
+                        <div className="input-group mb-3">
+                        <Form.Control type="url" className="form-control" placeholder="http://example.com" aria-label="http://example.com" aria-describedby="basic-addon2" ref={urlRef} required/>
+                        <div className="input-group-append">
+                            <Button type="submit">Button</Button>
+                        </div>
+                        </div>
+                    </Form>
+
+                    <Link to="/history" className="btn btn-primary w-100 mt-3">Crawl History</Link>
                 </Card.Body>
             </Card>
             <div className="w-100 text-center mt-2">
                  <Button variant="link" onClick={handleLogout}>Log Out</Button>
             </div>
+
+            {crawledUrl? 
+            <div> Hello World</div>
+            :
+            <Alert variant="danger">No crawled url found</Alert>
+            }
         </div>
-        
     )
 }
