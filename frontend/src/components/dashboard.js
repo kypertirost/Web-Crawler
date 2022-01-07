@@ -9,6 +9,7 @@ export default function Dashboard(){
     const [crawledUrl, setCrawledUrl] = useState([]);
     const [ error, setError ] = useState("");
     const { currentUser, logout} = useAuth(); 
+    console.log(currentUser);
     const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
 

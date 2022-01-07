@@ -6,3 +6,6 @@
 
 # ignore vscode setup
 .vscode
+
+# backend config
+backend/.env
