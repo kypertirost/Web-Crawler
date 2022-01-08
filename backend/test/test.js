@@ -51,17 +51,5 @@ describe("Utitlity Unit test", function() {
         );
     })
 
-    // it("Crawl DAO tests", async(done) => {
-    //   const result = {
-    //     title : "test",
-    //     images : ["test"],
-    //     hrefs: ["test"]
-    //   }
-    //   const email = "test@test.com"
-    //   const response = await CrawlDAO.addHistory(email, result);
-    //   const id = response._id;
-      
-    //   done();
-    // })
   });
 });
