@@ -1,9 +1,8 @@
 import app from "./server.js";
 import dotenv from "dotenv";
 import mongoose from 'mongoose';
-
 dotenv.config();
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 5000
 mongoose.connect(process.env.CRAWL_DB_URI,   
     {
     maxPoolSize : 50,
@@ -14,6 +13,7 @@ mongoose.connect(process.env.CRAWL_DB_URI,
   }).catch((err) => {
         console.error(`Cannot access databases due to ${error}`)
     });
+
 app.listen(PORT, ()=> {
     console.log(`listening at the port ${PORT}`)
 })
