@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "http://localhost:5000/api/v1/web-crawl",
+    baseURL: "https://webcrawlapi.herokuapp.com/api/v1/web-crawl",
     headers:{
         "Content-type" :"application/json"
     }

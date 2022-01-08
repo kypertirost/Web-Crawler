@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Table, Button } from "react-bootstrap";
 import { useAuth } from "../contexts/auth";
 import WebCrawlerDataService from "../service/web-crawl-service";
@@ -9,17 +9,13 @@ dayjs.extend(relativeTime)
 
 export default function Crawl(){
     const [userHistory, setUserHistory] = useState({});
-    
-    const [searchParams, setSearchParams] = useSearchParams();
-    const {currentUser} = useAuth();
+        const {currentUser} = useAuth();
     const getUserHistory = async () => {
         let result = await WebCrawlerDataService.getUserHistory(currentUser._delegate.email);
         setUserHistory(result);
     }
 
     const deleteHistory = async (obj, i) => {
-        console.log(obj._id)
-        console.log( currentUser._delegate.email)
         await WebCrawlerDataService.deleteUserHistory(obj._id, currentUser._delegate.email)
         let result = await WebCrawlerDataService.getUserHistory(currentUser._delegate.email);
         setUserHistory(result)  

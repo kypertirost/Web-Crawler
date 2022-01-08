@@ -1,12 +1,10 @@
-import React, {useRef, useState, useEffect} from "react";
+import React, {useRef, useState} from "react";
 import { Card, Button, Alert, Form } from "react-bootstrap";
 import { useAuth } from "../contexts/auth";
 import { Link, useNavigate } from "react-router-dom";
-import WebCrawlerDataService from "../service/web-crawl-service";
 import {Buffer} from 'buffer';
 export default function Dashboard(){
     const urlRef = useRef();
-    const [crawledUrl, setCrawledUrl] = useState([]);
     const [ error, setError ] = useState("");
     const { currentUser, logout} = useAuth(); 
     console.log(currentUser);

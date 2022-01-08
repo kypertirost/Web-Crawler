@@ -34,7 +34,7 @@ export default function HistoryCrawl(){
                          <strong>Images Found:</strong>
                          <ul>
                         {result.images.map((v, i) => {
-                           return <li key={`links-${i}`}><Image src={v} rounded></Image></li>
+                           return <li key={`links-${i}`}><Card.Img src={v} rounded></Card.Img></li>
                         })}
                     </ul>
                        </div>}

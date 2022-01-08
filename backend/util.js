@@ -1,7 +1,6 @@
 //This is the module for utility function that needed for different controller
 import fetch from "node-fetch";
 import cheerio from "cheerio";
-import { EventEmitter } from "events"
 
 /**
  * Utilitly function to get the absolute link of given url
