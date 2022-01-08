@@ -8,7 +8,8 @@ import Dashboard from "./dashboard.js";
 import Login from "./login.js";
 import PrivateRoute from "./PrivateRoute.js";
 import ForgotPassword from "./forgot-password.js";
-
+import History from "./history.js";
+import HistoryCrawl from "./history_crawl.js";
 function App() {
   return (
     
@@ -20,16 +21,28 @@ function App() {
             <AuthProvider>
               <Routes>
                 <Route path = "/" element={
-                <PrivateRoute>
-                  <Dashboard/>
-                </PrivateRoute>
+                  <PrivateRoute>
+                    <Dashboard/>
+                  </PrivateRoute>
                 }/>
                 <Route path="/signup" element={<Signup/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
-                {/* <Route path="/history" element={<Crawl/>}/> */}
-                <Route path="/crawl" element={<Crawl/>}/>
-
+                <Route path="/crawl" element={
+                  <PrivateRoute>
+                    <Crawl/>
+                  </PrivateRoute>
+                }/>
+                <Route path="/history" element= {
+                  <PrivateRoute>
+                    <History/>
+                  </PrivateRoute>
+                }/>
+                <Route path="/history-crawl" element= {
+                  <PrivateRoute>
+                    <HistoryCrawl/>
+                  </PrivateRoute>
+                }/>
               </Routes>
             </AuthProvider>
           </Router>

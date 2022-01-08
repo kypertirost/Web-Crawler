@@ -1,6 +1,7 @@
-import expect from "expect.js"
-import { getUrl, crawl } from "../util.js"
-
+import expect from "expect.js";
+import { getUrl, crawl } from "../util.js";
+import CrawlDAO from "../dao/CrawlDAO.js";
+import mongoose from "mongoose";
 describe("Utitlity Unit test", function() {
   describe("getUrl Function test", () => {
     it('Absolute Link', function() {
@@ -49,5 +50,18 @@ describe("Utitlity Unit test", function() {
           ]
         );
     })
+
+    // it("Crawl DAO tests", async(done) => {
+    //   const result = {
+    //     title : "test",
+    //     images : ["test"],
+    //     hrefs: ["test"]
+    //   }
+    //   const email = "test@test.com"
+    //   const response = await CrawlDAO.addHistory(email, result);
+    //   const id = response._id;
+      
+    //   done();
+    // })
   });
 });

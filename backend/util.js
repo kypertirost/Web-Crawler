@@ -1,9 +1,8 @@
 //This is the module for utility function that needed for different controller
 import fetch from "node-fetch";
 import cheerio from "cheerio";
-import Queue from "bull";
 import { EventEmitter } from "events"
-import { log } from "console";
+
 /**
  * Utilitly function to get the absolute link of given url
  * @param link The url given to be parsed
@@ -54,6 +53,7 @@ export async function crawl(url) {
   const title = $("title").text();
   return {
     "title": title,
+    "url": link.href,
     "hrefs" : links,
     "images" : imgs
   }
