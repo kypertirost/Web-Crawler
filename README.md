@@ -1,5 +1,5 @@
 # Web-Crawler
-Stochastic Full Stack Homework
+MERN Stack Web Cralwer application
 
 ## App Structure
 ![app structure](./docs/app_structure.png)
