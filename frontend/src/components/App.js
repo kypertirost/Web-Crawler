@@ -49,37 +49,6 @@ function App() {
         </div>
       </Container>
     
-    // <div className="App">
-    //  <label for="url">Enter an https:// URL:</label>
-
-    // <div>
-    //   <input type="url" name="url" id="url"
-    //         placeholder="https://example.com"
-    //         pattern="http(|s)://.*" size="30"
-    //         required></input>
-
-    //   <input class="favorite styled"  
-    //         type="button"
-    //         value="Submit">
-    //         {/* <Link to={"/crawl"} className="nav-link">
-    //         </Link> */}
-    //         </input>
-
-    // </div>
-
-    // <div className="container mt-3">
-    //   <Routes>
-    //     <Route path={"/crawl"} element={<Crawl />} />
-
-    //     {/* <Route 
-    //       path="/login"
-    //       element = {<Login login ={login}/>}
-    //     /> */}
-    //   </Routes>
-    //   </div> 
-    // </div>
-
-    
   );
 }
 
